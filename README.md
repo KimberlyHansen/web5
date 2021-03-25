@@ -1,2 +1,2 @@
-# GEOM 99 Web Project Web5 
-Group: Web5
+# GEOM 99 Web Project 
+Group Web5
