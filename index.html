@@ -18,7 +18,7 @@
 		<div id="mapid"></div>
 		
 		<script>
-		var mymap = L.map('mapid').setView([51.2538, -85.3232], 13);
+		var mymap = L.map('mapid').setView([51.2538, -85.3232], 5);
 		
 		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -29,7 +29,22 @@
 			accessToken: 'pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg'
 		}).addTo(mymap);
 		
-		mymap.addLayer(new L.TileLayer("http://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38"));
+		var precip = (new L.TileLayer("http://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
+			weather = (new L.TileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
+			wind = (new L.TileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
+			clouds = (new L.TileLayer("http://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
+			pressure = (new L.TileLayer("http://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38"));
+		
+		
+		var overlayMaps = {
+		"Precipitation" : precip,
+		"Weather" : weather,
+		"Wind" : wind,
+		"Clouds" : clouds,
+		"Pressure" : pressure
+		};
+		
+		L.control.layers(overlayMaps).addTo(mymap);
 
 		
 		
