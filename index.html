@@ -18,7 +18,8 @@
 		<div id="mapid"></div>
 		
 		<script>
-		var mymap = L.map('mapid').setView([51.2538, -85.3232], 5);
+        // Creating the map variable and setting zoom and coordinates to Ontario, Canada     
+		var map = L.map('mapid').setView([51.2538, -85.3232], 5);
 		
 		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -27,15 +28,22 @@
 			tileSize: 512,
 			zoomOffset: -1,
 			accessToken: 'pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg'
-		}).addTo(mymap);
+		}).addTo(map);
 		
+        // Creating variables for weather tile layers
+        // OpenWeatherMap API tile reference: https://openweathermap.org/api/weathermaps
+        // Leaflet tile reference: https://leafletjs.com/reference-1.7.1.html#tilelayer
+        // Javascript 'new' operator reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
 		var precip = (new L.TileLayer("http://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
 			weather = (new L.TileLayer("http://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
 			wind = (new L.TileLayer("http://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
 			clouds = (new L.TileLayer("http://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38")),
 			pressure = (new L.TileLayer("http://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=35b79f04000d801c24276115e7093f38"));
 		
-		
+		    
+        // Key-value pairs used for the control panel 
+        // Keys are the text values seen in the control panel, and the values are the corresponding tile layer variables
+        // Layer groups and layers control tutorial: https://leafletjs.com/examples/layers-control/
 		var overlayMaps = {
 		"Precipitation" : precip,
 		"Weather" : weather,
@@ -44,7 +52,9 @@
 		"Pressure" : pressure
 		};
 		
-		L.control.layers(overlayMaps).addTo(mymap);
+        // Control panel in top left corner
+        // Gives user the ability to toggle between different weather layers
+		L.control.layers(overlayMaps).addTo(map);
 
 		
 		
