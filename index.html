@@ -82,7 +82,7 @@
 		L.control.layers(overlayMaps).addTo(map);
 
         var trailheads = L.esri.Cluster.featureLayer({
-			url: 'https://ajutzi.duckdns.org:6443/arcgis/rest/services/ontarioHiking/MapServer/1'
+			url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/ontarioHiking/FeatureServer/1'
 		}).addTo(map);
 
 		trailheads.bindPopup(function (layer) {
@@ -90,7 +90,7 @@
 		});
 		
 		var trailPaths = L.esri.featureLayer({
-			url: 'https://ajutzi.duckdns.org:6443/arcgis/rest/services/ontarioHiking/MapServer/2'
+			url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/ontarioHiking/FeatureServer/2'
 		}).addTo(map);
 		
 		trailPaths.bindPopup(function (layer) {
