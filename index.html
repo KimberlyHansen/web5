@@ -30,6 +30,8 @@
           integrity="sha512-fEdNFHisleVtEYdLhW4Z2RsR7TN6hLutE/+O4D+skfTNY2rlHm8HOZARPWkdrFFy/+i2KjFxcZAKTUWaVfbV0g=="
           crossorigin=""></script>
 
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 		 <style>  
 			 #mapid { 
 				height: 100%;
@@ -96,6 +98,19 @@
 		trailPaths.bindPopup(function (layer) {
 			return L.Util.template('<p><strong>{NAME}</strong></p>', layer.feature.properties);
 		});
+
+        // user gets weather data by clicking a location on the tile map
+        map.on('click', function(layer){
+		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
+		  console.log(latlng.lat + ', ' + latlng.lng);
+		  alert(latlng.lat + ' , ' + latlng.lng);
+		  $.get( "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+latlng.lat+"&lon="+latlng.lng+"&appid=35b79f04000d801c24276115e7093f38", function( data ) {
+			  console.log(data);
+			  var weatherdata = JSON.stringify(data);
+			  alert( "Data Loaded: " + weatherdata );
+			});
+		});
+			
 
 		
 		</script>
