@@ -31,6 +31,15 @@
           crossorigin=""></script>
 
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+	<!-- Load Esri Leaflet Geocoder from CDN -->
+		
+  		<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.css"
+    		integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+   	 	crossorigin="">
+  		<script src="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.js"
+    		integrity="sha512-vZbMwAf1/rpBExyV27ey3zAEwxelsO4Nf+mfT7s6VTJPUbYmD2KSuTRXTxOFhIYqhajaBU+X5PuFK1QJ1U9Myg=="
+    		crossorigin=""></script>
 
 		 <style>  
 			 #mapid { 
@@ -111,6 +120,29 @@
 			});
 		});
 			
+	// Geocoding for search //
+
+		var searchControl = L.esri.Geocoding.geosearch({
+    	position: 'topright',
+    	placeholder: 'Where would you like to go?',
+    	useMapBounds: false,
+    	providers: [L.esri.Geocoding.arcgisOnlineProvider({
+      	apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt",
+      	nearby: {
+        lat: -33.8688,
+        lng: 151.2093
+      	}
+    	})]
+  	}).addTo(map);
+
+  		var results = L.layerGroup().addTo(map);
+
+  	searchControl.on('results', function (data) {
+    	results.clearLayers();
+    	for (var i = data.results.length - 1; i >= 0; i--) {
+      	results.addLayer(L.marker(data.results[i].latlng));
+    	}
+  	});		
 
 		
 		</script>
