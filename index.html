@@ -97,7 +97,7 @@
 		}).addTo(map);
 
 		trailheads.bindPopup(function (layer) {
-			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSO}<br>Website: {TRAIL_AS_1}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTIO}</i><br> Length: <p>{LENGTH_KMS} <br>Difficulty: {OTC_TRAIL_}</p>', layer.feature.properties);
+			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSOCIATION}<br>Website: {TRAIL_ASSOCIATION_WEBSITE}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTIO}</i><br>Length: {LENGTH_KMS}<br>Difficulty: {OTC_TRAIL_CHALLENGE}</p>', layer.feature.properties);
 		});
 		
 		var trailPaths = L.esri.featureLayer({
