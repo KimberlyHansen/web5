@@ -93,11 +93,11 @@
 		L.control.layers(overlayMaps).addTo(map);
 
         var trailheads = L.esri.Cluster.featureLayer({
-			url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/ontarioHiking/FeatureServer/1'
+			url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20'
 		}).addTo(map);
 
 		trailheads.bindPopup(function (layer) {
-			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSO}<br>Website: {TRAIL_AS_1}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTIO}</i><br>Difficulty: {OTC_TRAIL_}</p>', layer.feature.properties);
+			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSO}<br>Website: {TRAIL_AS_1}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTIO}</i><br>Length: <p>{LENGTH_KMS}</p> <br>Difficulty: {OTC_TRAIL_}</p>', layer.feature.properties);
 		});
 		
 		var trailPaths = L.esri.featureLayer({
