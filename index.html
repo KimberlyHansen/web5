@@ -105,7 +105,7 @@
 		}).addTo(map);
 		
 		trailPaths.bindPopup(function (layer) {
-			return L.Util.template('<p><strong>{NAME}</strong></p>', layer.feature.properties);
+			return L.Util.template('<p><strong>Path material:{SURFACE_DETAIL}</strong></p>', layer.feature.properties);
 		});
 
         // user gets weather data by clicking a location on the tile map
