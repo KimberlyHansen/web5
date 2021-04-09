@@ -120,29 +120,25 @@
 			});
 		});
 			
-	// Geocoding for search //
+	//Search feature layer Trail names plus geocoding//
+    
+   	var arcgisOnlineProvider = L.esri.Geocoding.arcgisOnlineProvider({
+    	apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt"
+	}); 
 
-		var searchControl = L.esri.Geocoding.geosearch({
-    	position: 'topright',
-    	placeholder: 'Where would you like to go?',
-    	useMapBounds: false,
-    	providers: [L.esri.Geocoding.arcgisOnlineProvider({
-      	apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt",
-      	nearby: {
-        lat: -33.8688,
-        lng: 151.2093
-      	}
-    	})]
-  	}).addTo(map);
-
-  		var results = L.layerGroup().addTo(map);
-
-  	searchControl.on('results', function (data) {
-    	results.clearLayers();
-    	for (var i = data.results.length - 1; i >= 0; i--) {
-      	results.addLayer(L.marker(data.results[i].latlng));
+  	var trailsProvider = L.esri.Geocoding.featureLayerProvider({
+    	url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20',
+    	searchFields: ['TRAIL_NAME'],
+    	label: 'Ontario Trails',
+    	bufferRadius: 5000,
+    	formatSuggestion: function (feature) {
+      	return feature.properties.TRAIL_NAME;
     	}
-  	});		
+  	});
+  
+	L.esri.Geocoding.geosearch({
+    	providers: [arcgisOnlineProvider, trailsProvider]
+  	}).addTo(map);	
 
 		
 		</script>
