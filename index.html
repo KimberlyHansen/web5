@@ -102,7 +102,7 @@
 		
 		var trailPaths = L.esri.featureLayer({
 			url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/19'
-		}).addTo(map);
+		});
 		
 		trailPaths.bindPopup(function (layer) {
 			return L.Util.template('<p><strong>Path material:{SURFACE_DETAIL}</strong></p>', layer.feature.properties);
@@ -120,25 +120,48 @@
 			});
 		});
 			
-	//Search feature layer Trail names plus geocoding//
+	    //Search feature layer Trail names plus geocoding//
     
-   	var arcgisOnlineProvider = L.esri.Geocoding.arcgisOnlineProvider({
-    	apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt"
-	}); 
+        var arcgisOnlineProvider = L.esri.Geocoding.arcgisOnlineProvider({
+            apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt"
+        }); 
 
-  	var trailsProvider = L.esri.Geocoding.featureLayerProvider({
-    	url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20',
-    	searchFields: ['TRAIL_NAME'],
-    	label: 'Ontario Trails',
-    	bufferRadius: 5000,
-    	formatSuggestion: function (feature) {
-      	return feature.properties.TRAIL_NAME;
-    	}
-  	});
+        var trailsProvider = L.esri.Geocoding.featureLayerProvider({
+            url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20',
+            searchFields: ['TRAIL_NAME'],
+            label: 'Ontario Trails',
+            bufferRadius: 5000,
+            formatSuggestion: function (feature) {
+            return feature.properties.TRAIL_NAME;
+            }
+        });
   
-	L.esri.Geocoding.geosearch({
-    	providers: [arcgisOnlineProvider, trailsProvider]
-  	}).addTo(map);	
+        L.esri.Geocoding.geosearch({
+            providers: [arcgisOnlineProvider, trailsProvider]
+        }).addTo(map);
+
+    
+        // minimum zoom level for the trailPaths layer
+        // source: https://gis.stackexchange.com/questions/182628/leaflet-layers-on-different-zoom-levels-how
+        map.on('zoomend', function() {
+            var zoomlevel = map.getZoom();
+                if (zoomlevel  <10){
+                    if (map.hasLayer(trailPaths)) {
+                        map.removeLayer(trailPaths);
+                    } else {
+                        console.log("no point layer active");
+                    }
+                }
+                if (zoomlevel >= 10){
+                    if (map.hasLayer(trailPaths)){
+                        console.log("layer already added");
+                    } else {
+                        map.addLayer(trailPaths);
+                    }
+                }
+            console.log("Current Zoom Level =" + zoomlevel)
+            });
+                    
 
 		
 		</script>
