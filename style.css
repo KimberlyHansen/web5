@@ -33,9 +33,11 @@ html, body{
 
 .padding {
   padding-bottom: 2rem;
-
 }
-
+.welcome {
+  width: 75%;
+  margin: 0 auto;
+}
 
 
 
