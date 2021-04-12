@@ -31,6 +31,15 @@
           crossorigin=""></script>
 
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+	<!-- Load Esri Leaflet Geocoder from CDN -->
+		
+  		<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.css"
+    		integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+   	 	crossorigin="">
+  		<script src="https://unpkg.com/esri-leaflet-geocoder@3.0.0/dist/esri-leaflet-geocoder.js"
+    		integrity="sha512-vZbMwAf1/rpBExyV27ey3zAEwxelsO4Nf+mfT7s6VTJPUbYmD2KSuTRXTxOFhIYqhajaBU+X5PuFK1QJ1U9Myg=="
+    		crossorigin=""></script>
 
 		 <style>  
 			 #mapid { 
@@ -84,26 +93,26 @@
 		L.control.layers(overlayMaps).addTo(map);
 
         var trailheads = L.esri.Cluster.featureLayer({
-			url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/ontarioHiking/FeatureServer/1'
+			url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20'
 		}).addTo(map);
 
 		trailheads.bindPopup(function (layer) {
-			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSO}<br>Website: {TRAIL_AS_1}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTIO}</i><br>Difficulty: {OTC_TRAIL_}</p>', layer.feature.properties);
+			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSOCIATION}<br>Website: {TRAIL_ASSOCIATION_WEBSITE}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTION}</i><br>Length: {LENGTH_KMS}km<br>Difficulty: {OTC_TRAIL_CHALLENGE}</p>', layer.feature.properties);
 		});
 		
 		var trailPaths = L.esri.featureLayer({
-			url: 'https://services1.arcgis.com/pMeXRvgWClLJZr3s/arcgis/rest/services/ontarioHiking/FeatureServer/2'
-		}).addTo(map);
+			url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/19'
+		});
 		
 		trailPaths.bindPopup(function (layer) {
-			return L.Util.template('<p><strong>{NAME}</strong></p>', layer.feature.properties);
+			return L.Util.template('<p><strong>Path material:{SURFACE_DETAIL}</strong></p>', layer.feature.properties);
 		});
 
         // user gets weather data by clicking a location on the tile map
         map.on('click', function(layer){
 		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
 		  console.log(latlng.lat + ', ' + latlng.lng);
-		  alert(latlng.lat + ' , ' + latlng.lng);
+		  //alert(latlng.lat + ' , ' + latlng.lng);
 		  $.get( "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+latlng.lat+"&lon="+latlng.lng+"&appid=35b79f04000d801c24276115e7093f38", function( data ) {
 			  console.log(data);
 			  var weatherdata = JSON.stringify(data);
@@ -111,6 +120,48 @@
 			});
 		});
 			
+	    //Search feature layer Trail names plus geocoding//
+    
+        var arcgisOnlineProvider = L.esri.Geocoding.arcgisOnlineProvider({
+            apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt"
+        }); 
+
+        var trailsProvider = L.esri.Geocoding.featureLayerProvider({
+            url: 'https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer/20',
+            searchFields: ['TRAIL_NAME'],
+            label: 'Ontario Trails',
+            bufferRadius: 5000,
+            formatSuggestion: function (feature) {
+            return feature.properties.TRAIL_NAME;
+            }
+        });
+  
+        L.esri.Geocoding.geosearch({
+            providers: [arcgisOnlineProvider, trailsProvider]
+        }).addTo(map);
+
+    
+        // minimum zoom level for the trailPaths layer
+        // source: https://gis.stackexchange.com/questions/182628/leaflet-layers-on-different-zoom-levels-how
+        map.on('zoomend', function() {
+            var zoomlevel = map.getZoom();
+                if (zoomlevel  <10){
+                    if (map.hasLayer(trailPaths)) {
+                        map.removeLayer(trailPaths);
+                    } else {
+                        console.log("no point layer active");
+                    }
+                }
+                if (zoomlevel >= 10){
+                    if (map.hasLayer(trailPaths)){
+                        console.log("layer already added");
+                    } else {
+                        map.addLayer(trailPaths);
+                    }
+                }
+            console.log("Current Zoom Level =" + zoomlevel)
+            });
+                    
 
 		
 		</script>
