@@ -122,6 +122,8 @@ section{
   display: flex;
   align-items: center;
   justify-content: center;
+  /*for status*/
+  flex-direction: column;
 }
 .container{
   width: 90%;
@@ -169,7 +171,41 @@ button[type="submit"]:hover{
   background-color:burlywood;
 }
 
+#status{
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
 
+#status.success{
+  background-color: chartreuse;
+  animation: status 4s ease delay forwards;
+}
+
+#status.error{
+  background-color: red;
+  color: white;
+  animation: status 4s ease forwards;
+}
+
+@keyframes status{
+  0%{
+    opacity: 1;
+    pointer-events: all;
+  }
+  90%{
+    opacity: 1;
+    pointer-events: all;
+  }
+  10%{
+    opacity: 0;
+    pointer-events: none;
+  }
+
+}
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap
