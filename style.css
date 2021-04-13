@@ -110,7 +110,29 @@ figure {
 }
 
 
-
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+}
+section{
+  height: 100vh;
+  width: 100%;
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 0px 20px #c0b3b310;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
 
 
 /*
