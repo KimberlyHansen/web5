@@ -1,6 +1,6 @@
 # ***GEOM99 WEB GIS DEVELOPMENT 2021***
 
-#### WELCOME:wink:! WE ARE WEATHER GUYS! HERE IS THE LINK TO OUR WEBSITE:
+#### WELCOME :wave:! WE ARE WEATHER GUYS! :sun_with_face: HERE IS THE LINK TO OUR WEBSITE:
 
 
 > <https://kimberlyhansen.github.io/web5/home.html>
