@@ -122,6 +122,8 @@ section{
   display: flex;
   align-items: center;
   justify-content: center;
+  /*for status*/
+  flex-direction: column;
 }
 .container{
   width: 90%;
@@ -134,7 +136,76 @@ section{
   margin-bottom: 20px;
 }
 
+.form-group{
+  width: 100%;
+  margin-top: 20px;
+  font-size: 20px;
+}
 
+.form-group input,
+.form-group textarea{
+  width: 100%;
+  padding: 5px;
+  font-size: 18px;
+  border: 1px solid (128, 128,128,0.199); 
+  /*margin between label and input*/
+  margin-top: 5px;
+}
+
+button[type="submit"]{
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 8px;
+  font-family: 'Monsterrat';
+  color:brown;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: .3s ease background-color;
+}
+
+button[type="submit"]:hover{
+  background-color:burlywood;
+}
+
+#status{
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  padding: 10px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+#status.success{
+  background-color: chartreuse;
+  animation: status 4s ease delay forwards;
+}
+
+#status.error{
+  background-color: red;
+  color: white;
+  animation: status 4s ease forwards;
+}
+
+@keyframes status{
+  0%{
+    opacity: 1;
+    pointer-events: all;
+  }
+  90%{
+    opacity: 1;
+    pointer-events: all;
+  }
+  10%{
+    opacity: 0;
+    pointer-events: none;
+  }
+
+}
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap
