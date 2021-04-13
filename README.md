@@ -5,6 +5,6 @@
 
 > <https://kimberlyhansen.github.io/web5/home.html>
 
-!(https://github.com/KimberlyHansen/web5/blob/main/images/weatherguys.PNG)
+!(https://github.com/KimberlyHansen/web5/blob/main/weatherguys.png)
 
 
