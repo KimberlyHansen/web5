@@ -8,6 +8,6 @@
 
 
 
-![alt text](https://github.com/KimberlyHansen/web5/blob/main/images/weatherguys.png)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>![alt text](https://github.com/KimberlyHansen/web5/blob/main/images/weatherguys.png)
 
 
