@@ -80,19 +80,47 @@
     		crossorigin=""></script>
 
 		 <style>  
-			 #mapid { 
+			 #background {
+             	background-color: #C6E2E9;
+                height: 100%;
+                width: 100%;
+                }
+             #mapid { 
 				height: 60%;
-                                width: 100%;
+                width: 100%;
+			 }
+			 #temp {
+				 width:50%;
+			 }
+			 #temperature {
+				 width:50%;
+				 font-size: larger;
+				 color: navy;
+                 text-align: right;
+			 }
+			 #transbox {
+ 				margin: 10px;
+  				background-color: #E2F0F4;
+  				border: 1px  #1f3631;
+  				float: right;
+  				width: 40%;
 			 }
 			/* #mapid { height: 480px; } */
 		 </style> 
 	</head>
 	<body>
 	
-		<div id="mapid"></div>
-			<div>
-				<p id="temp"></p>
-			</div>
+		<div id="background">
+			<div id="mapid"></div>
+				
+			  <div>  
+				<div>
+					<p id="temp"></p></div>
+					<div id= "transbox">
+						<div id="temperature"></div>
+					</div>
+				</div>
+			   </div> 
 		<script>
         // Creating the map variable and setting zoom and coordinates to Ontario, Canada     
 		var map = L.map('mapid').setView([51.2538, -85.3232], 5);
@@ -195,6 +223,7 @@
 			  var obj = JSON.parse(weatherdata);
 			  
 			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
+		
 			  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
 			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C"
 			  + "<br />" + obj.weather[0].main
@@ -221,6 +250,10 @@
 			  + "<br />" + "Visibility: " + obj.visibility + " m"
 			  + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
 			  
+			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
+			  document.getElementById("temperature").style.fontSize = 35;
+			  document.getElementById("temperature").style.fontFamily = "Arial";
+			  document.getElementById("temperature").style.color = "navy";
 			});
 		});
 			
