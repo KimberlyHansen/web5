@@ -280,14 +280,14 @@
         // source: https://gis.stackexchange.com/questions/182628/leaflet-layers-on-different-zoom-levels-how
         map.on('zoomend', function() {
             var zoomlevel = map.getZoom();
-                if (zoomlevel  <14){
+                if (zoomlevel  <13){
                     if (map.hasLayer(trailPaths)) {
                         map.removeLayer(trailPaths);
                     } else {
                         console.log("no point layer active");
                     }
                 }
-                if (zoomlevel >= 14){
+                if (zoomlevel >= 13){
                     if (map.hasLayer(trailPaths)){
                         console.log("layer already added");
                     } else {
