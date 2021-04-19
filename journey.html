@@ -53,15 +53,22 @@
     Ontario trail data and the OpenWeatherMap API. We weren't sure yet of how we would reference the trail data. 
     We decided that using ESRI feature services made the most sense for our project, because of ESRI feature 
     services high compatibility with leaflet. During this time (which we would later change) we were hosting 
-    the Ontario trail data as data hosted on ArcGIS online (downloaded and hosted on one of our profiles). The first challenge with OpenWeatherMap API was getting to display
-     live weather tile layers (namely temperature, precipitation, pressure, and wind) to display on a web map. 
+    the Ontario trail data as data hosted on ArcGIS online (downloaded and hosted on one of our profiles). 
+    At this point we configured our map to display pop-ups with information when you click on a trail point or line.
+    The first challenge with OpenWeatherMap API was getting to display live weather tile layers (namely temperature, precipitation, pressure, and wind) to display on a web map. 
     It was determined that to display a weather map tile in leaflet, you need to reference the url in a leaflet tileLayer
     layer object. We also wanted to give the user the option to choose between different weather layers, so to do
     that we made variables that contained the tile layers, and then added those variables to scripted control panel.
   </p>  
 
   <div class="col-12"><h4><p class="text-info">March 31 - April 6: </p></h4></div>
-  <p class="text-muted"></p>
+  <p class="text-muted">During this time it was brought to our attention by our Professor, Shawn Morgan, that
+    Ontario Trail data was hosted on an ArcGIS REST server (https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer).
+    We decided to switch to using this server to reference our data because this server has more longevity 
+    than our Fleming ArcGIS online accounts, and the data is regularly updated. The only difference in referencing this
+    data was that the field names were different, so we had to change the field names in our pop-up box script lines.
+
+  </p>
   
   <div class="col-12"><h4><p class="text-info">April 7-13: </p></h4></div>
   <p class="text-muted"></p>
