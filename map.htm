@@ -166,7 +166,7 @@
 			if (theMarker != undefined) {
 					  map.removeLayer(theMarker);
 				};
-			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSOCIATION}<br>Website: {TRAIL_ASSOCIATION_WEBSITE}<br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTION}</i><br>Length: {LENGTH_KMS}km<br>Difficulty: {OTC_TRAIL_CHALLENGE}</p>', layer.feature.properties);
+			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSOCIATION}<br>Website: <a href="url">{TRAIL_ASSOCIATION_WEBSITE}</a><br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTION}</i><br>Length: {LENGTH_KMS}km<br>Difficulty: {OTC_TRAIL_CHALLENGE}</p>', layer.feature.properties);
 		});
 		
 		var trailPaths = L.esri.featureLayer({

@@ -76,15 +76,28 @@
     which is then passed into the API url which is set up to take the latidue and longitude variables as url parameters.
     Using jQuery, the OpenWeatherMap API url fetches weather data pertaining to those specific coordinates. 
     The OpenWeatherMap API url returns a JSON file. At this point the data is being displayed as an alert, but we
-    want to display the data in the html (either beside or below the map)(which we do later on).
+    want to display the data in the html (either beside or below the map, which we do later on).
 
   </p>
   
   <div class="col-12"><h4><p class="text-info">April 7-13: </p></h4></div>
-  <p class="text-muted"></p>
+  <p class="text-muted">During this time we made significant upgrades to our weather data display. Instead of
+    displaying the data in an alert box, the data is now displayed below the map as an html element. The data
+    is also parsed so the only temperature, temperature feels like, weather description, visibility, and wind gust.
+    We also added a larger temperature display on the right side underneath the map. In order to display this weather
+    data we needed to first understand how the JSON data was structured and how to display it in an html element.
+    The JSON file needs to first be converted into a string and parsed in order to be able to display properly in 
+    the html element. Once that is done, specific elements can be extracted and displayed in the html document
+    by referencing the stringified parsed JSON object. The temperature, for example is called by "obj.main.temp"
+    where obj is the stringified parsed JSON object, and main and temp are respectively parent and child features
+    in the JSON file (i.e. temp is the current temperature value, and it is within the "main" feature). 
+  </p>
   
   <div class="col-12"><h4><p class="text-info">April 14-20: </p></h4></div>
-  <p class="text-muted"></p>  
+  <p class="text-muted">During this time we worked to clean up our project, and also any additional features or 
+    changes to the map. One such change was the trail data display. We wanted to display to try to display the trail 
+    data in an html element rather  
+  </p>  
 
 <div class="col-12"><h4><p class="text-danger">Data Acquisition: </p></h4></div>
   <p class="text-muted">We acquired our data from several open data portals. Our base map belongs to OpenStreetMap. 
