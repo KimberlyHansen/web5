@@ -63,10 +63,20 @@
 
   <div class="col-12"><h4><p class="text-info">March 31 - April 6: </p></h4></div>
   <p class="text-muted">During this time it was brought to our attention by our Professor, Shawn Morgan, that
-    Ontario Trail data was hosted on an ArcGIS REST server (https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer).
+    Ontario Trail data was hosted on an ArcGIS REST server (<a href="url">https://ws.lioservices.lrc.gov.on.ca/arcgis1071a/rest/services/LIO_OPEN_DATA/LIO_Open04/MapServer)</a>.
     We decided to switch to using this server to reference our data because this server has more longevity 
     than our Fleming ArcGIS online accounts, and the data is regularly updated. The only difference in referencing this
     data was that the field names were different, so we had to change the field names in our pop-up box script lines.
+    During this time we also added marker clustering to the trailhead points, and a search bar for general locations using
+     ESRI geocoding (we would later add trail layers to the search bar).
+    We also had a major breakthrough this week in regards to fetching location specific weather data on click from
+    OpenWeatheMap API. Fecthing OpenWeatherMap API involves using an OpenWeatherMap API url with specified parameters.
+    One of the parameters is latitude and longitude. Using the Leaflet 'on click' method we get the latitude and
+    longitude when a user clicks a location (or point marker). The latitude and longitude data is then saved to a local variable
+    which is then passed into the API url which is set up to take the latidue and longitude variables as url parameters.
+    Using jQuery, the OpenWeatherMap API url fetches weather data pertaining to those specific coordinates. 
+    The OpenWeatherMap API url returns a JSON file. At this point the data is being displayed as an alert, but we
+    want to display the data in the html (either beside or below the map)(which we do later on).
 
   </p>
   
