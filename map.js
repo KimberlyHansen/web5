@@ -114,11 +114,14 @@
 			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
 			  document.getElementById("temperature").style.fontSize = 35;
 			  document.getElementById("temperature").style.fontFamily = "Arial";
-			   if (obj.main.feels_like < 0) {
+		
+		var dynamictemp = obj.main.feels_like;
+			  if (dynamictemp < 0) {
 				document.getElementById("temperature").style.color = "navy";}
-			  if (obj.main.feels_like > 0) {
+			  if (dynamictemp > 0) {
 				document.getElementById("temperature").style.color = "red";}
-			  if (obj.weather[0].ID = 801,802,803,804) {
+		var weatherlogo = obj.weather[0].ID
+			  if (weatherlogo = 801,802,803,804) {
 				document.getElementbyId("pic").url = 'http://openweathermap.org/img/wn/10d@2x.png';}
 			});
 		});
