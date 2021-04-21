@@ -60,6 +60,10 @@
 			return L.Util.template('<p><strong>Path material:{SURFACE_DETAIL}</strong></p>', layer.feature.properties);
 		});
 
+
+		var startup = document.getElementById("start").innerHTML = "Ontario Trail Weather map: Click a marker to get trail information, and and click anywhere to get the current weather"
+
+
 		// source: https://github.com/pointhi/leaflet-color-markers
 		var greyIcon = new L.Icon({
 		  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
@@ -76,6 +80,8 @@
 		  map.on('click',function(e){
 			lat = e.latlng.lat;
 			lon = e.latlng.lng;
+
+			$('#start').remove();
 
 			console.log("You clicked the map at LAT: "+ lat+" and LONG: "+lon );
 				//Clear existing marker, 
@@ -117,6 +123,9 @@
 		});
 
 		trailheads.on('click', function(layer){
+		  
+		  $('#start').remove();
+
 		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
 		  console.log(latlng.lat + ', ' + latlng.lng);
 		  $.get( "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="+latlng.lat+"&lon="+latlng.lng+"&appid=35b79f04000d801c24276115e7093f38", function( data ) {
