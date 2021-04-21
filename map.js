@@ -45,7 +45,7 @@
 		trailheads.bindPopup(function (layer) {
 			if (theMarker != undefined) {
 					  map.removeLayer(theMarker);
-				};
+				}
 			return L.Util.template('<p>Trail: <strong>{TRAIL_NAME}</strong><br>Association: {TRAIL_ASSOCIATION}<br>Website: <a href="url">{TRAIL_ASSOCIATION_WEBSITE}</a><br>Activity: {ACTIVITY}<br>Description: <i>{DESCRIPTION}</i><br>Length: {LENGTH_KMS}km<br>Difficulty: {OTC_TRAIL_CHALLENGE}</p>', layer.feature.properties);
 		});
 		
@@ -56,7 +56,7 @@
 		trailPaths.bindPopup(function (layer) {
 			if (theMarker != undefined) {
 					  map.removeLayer(theMarker);
-				};
+				}
 			return L.Util.template('<p><strong>Path material:{SURFACE_DETAIL}</strong></p>', layer.feature.properties);
 		});
 
@@ -88,7 +88,7 @@
 
 				if (theMarker != undefined) {
 					  map.removeLayer(theMarker);
-				};
+				}
 
 			//Add a marker to show where you clicked.
 			 theMarker = L.marker([lat,lon], {icon: greyIcon}).addTo(map);  
@@ -109,11 +109,7 @@
 			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
 		
 			  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
-			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C"
-			  + "<br />" + obj.weather[0].main
-			  + "<br />" + obj.weather[0].description
-			  + "<br />" + "Visibility: " + obj.visibility + " m"
-			  + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
+			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C" + "<br />" + obj.weather[0].main + "<br />" + obj.weather[0].description + "<br />" + "Visibility: " + obj.visibility + " m" + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
 
 			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
 			  document.getElementById("temperature").style.fontSize = 35;
@@ -136,11 +132,7 @@
 			  
 			  // returning json values help: https://idratherbewriting.com/learnapidoc/docapis_access_json_values.html
 			  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
-			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C"
-			  + "<br />" + obj.weather[0].main
-			  + "<br />" + obj.weather[0].description
-			  + "<br />" + "Visibility: " + obj.visibility + " m"
-			  + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
+			  "Current weather: " + obj.main.temp + " °C" +  "<br />" + "Feels like: " + obj.main.feels_like + " °C" + "<br />" + obj.weather[0].main + "<br />" + obj.weather[0].description + "<br />" + "Visibility: " + obj.visibility + " m" + "<br />" + "Wind gust: " + obj.wind.gust + " km/h";
 			  
 			  document.getElementById("temperature").innerHTML = obj.main.feels_like + " °C";
 			  document.getElementById("temperature").style.fontSize = 35;
@@ -188,7 +180,7 @@
                         map.addLayer(trailPaths);
                     }
                 }
-            console.log("Current Zoom Level =" + zoomlevel)
+            console.log("Current Zoom Level =" + zoomlevel);
             });
                     
 
