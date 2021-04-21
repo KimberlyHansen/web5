@@ -120,9 +120,6 @@
 				document.getElementById("temperature").style.color = "navy";}
 			  if (dynamictemp > 0) {
 				document.getElementById("temperature").style.color = "red";}
-		var weatherlogo = obj.weather[0].ID
-			  if (weatherlogo = 801,802,803,804) {
-				document.getElementbyId("pic").url = 'http://openweathermap.org/img/wn/10d@2x.png';}
 			});
 		});
 
@@ -150,9 +147,6 @@
 				document.getElementById("temperature").style.color = "navy";}
 			  if (dynamictemp > 0) {
 				document.getElementById("temperature").style.color = "red";}
-		var weatherlogo = obj.weather[0].ID
-			  if (weatherlogo = 801,802,803,804) {
-				document.getElementbyId("pic").url = 'http://openweathermap.org/img/wn/10d@2x.png';}
 
 			});
 		});
