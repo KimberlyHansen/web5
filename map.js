@@ -117,9 +117,13 @@
 		
 		var dynamictemp = obj.main.feels_like;
 			  if (dynamictemp < 0) {
-				document.getElementById("temperature").style.color = "navy";}
+				document.getElementById("temperature").style.color = "navy";
+			  	document.getElementById("temperature").style.fontSize = 35;
+			  	document.getElementById("temperature").style.fontFamily = "Arial";}
 			  if (dynamictemp > 0) {
-				document.getElementById("temperature").style.color = "red";}
+				document.getElementById("temperature").style.color = "red";
+			  	document.getElementById("temperature").style.fontSize = 35;
+			  	document.getElementById("temperature").style.fontFamily = "Arial";}
 			});
 		});
 
