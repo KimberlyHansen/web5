@@ -143,7 +143,7 @@
 	    //Search feature layer Trail names plus geocoding//
     
         var arcgisOnlineProvider = L.esri.Geocoding.arcgisOnlineProvider({
-            apikey: "AAPKb0ca0bbad2b54f9e95e3a84f0c93fa55Bthlfs8V3jANIB6Sxe9b2f1aoBAHWR9j07K021pFKJ60hj3eSSHb9pvAqsxDRuGt"
+            apikey: "AAPK8f4efd31704b4fdbac83f0919b3c87062-2cORlqNMZqlULdoh9mzEY_4gPuy3OuWGbVye-kuYgk5p5L-mbMDAQueCV71_HA"
         }); 
 
         var trailsProvider = L.esri.Geocoding.featureLayerProvider({
