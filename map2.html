@@ -1,0 +1,204 @@
+<html>
+	<head>
+	
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		  crossorigin=""/>
+	  
+		 <!-- Make sure you put this AFTER Leaflet's CSS -->
+		 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		   crossorigin=""></script>
+		   	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
+		 
+		 <style>  
+			#mapid { height: 100%;
+                width: 75%;}
+				
+			#temp {
+				 width:20%;
+                		 float: left;
+				 position: absolute; 
+				 top: 190px; 
+				 right: 15px; 
+				 text-align: right;
+			 }
+		 </style> 
+	</head>
+	<body>
+	
+		<div id="mapid"></div>
+		<div>
+			<p id="temp"></p>
+		</div>
+		<script>
+		
+		
+        // Creating the map variable and setting zoom and coordinates to Ontario, Canada     
+		var map = L.map('mapid').setView([51.2538, -85.3232], 5);
+		
+		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg', {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+			maxZoom: 19,
+			id: 'mapbox/streets-v11',
+			tileSize: 512,
+			zoomOffset: -1,
+			accessToken: 'pk.eyJ1IjoiYWp1dHppIiwiYSI6ImNrbGQ3d2E4MTE3cHAydXFlanJ1aG9maG4ifQ.6MOuQtvruOzh95-1C3i0jg'
+		}).addTo(map);
+		
+		
+		function roundUp(x, num)
+		{
+			return Math.ceil(x/num)*num;
+		}
+		
+		var customFloor = function(value, roundTo) {
+		return Math.floor(value / roundTo) * roundTo;
+		}
+		
+		
+		map.on('click', function(layer){
+		  var latlng = map.mouseEventToLatLng(layer.originalEvent);
+		  console.log(latlng.lat + ', ' + latlng.lng);
+		  //console.log('lat round down: ' + (Math.floor(latlng.lat * 10)/10) + ' lon round down: ' + (Math.floor(latlng.lng * 10)/10));
+		  //console.log('lat round up: ' + (Math.round(latlng.lat * 10)/10) + ' lon round up: ' + (Math.round(latlng.lng * 10)/10));
+		  //console.log(String(customFloor((latlng.lng), 0.4)).replace(".","").replace("-","") + String(RoundTo((latlng.lat), 0.4)).replace(".","") 
+		  //+ String(RoundTo((latlng.lng), 0.4)).replace(".","").replace("-","") + String(customFloor((latlng.lat), 0.4)).replace(".",""));
+		  
+		  var left = (String(customFloor((latlng.lng), 0.4)).replace(".","").replace("-","")).substring(0,3),
+		  top =  (String(roundUp((latlng.lat), 0.4)).replace(".","").substring(0,3)),
+		  right = (String(roundUp((latlng.lng), 0.4)).replace(".","").replace("-","")).substring(0,3),
+		  bottom = (String(customFloor((latlng.lat), 0.4)).replace(".","")).substring(0,3);
+		  
+		  console.log('left: ' + left);
+		  console.log('top: ' + top);
+		  console.log('right: ' + right);
+		  console.log('bottom: ' + bottom);
+		  console.log('grid_tilename_G' + left + top + right + bottom);
+		  tile = left + top + right + bottom
+		  //console.log(String(RoundTo((latlng.lng), 0.4)).replace(".","").replace("-",""));
+		  
+		  // left top right bottom
+		  //
+		  //$.get( "https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G7844447844.geojson", function( data ) {
+		  
+		  
+		  
+		  $.ajax({ 
+		  
+		  type: "GET",
+		  url: "http://104.245.145.251:50780/documents/grid_tilename_G" + tile + ".geojson", 
+		  dataType: 'jsonp',
+		  header: 'Access-Control-Allow-Origin', 
+		  
+		  
+		  
+		  sucess:function( data ) {
+		  //https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G792448788444.geojson
+		  
+		  //console.log(data);
+		  //var obj  = JSON.stringify(data);
+		  var obj = JSON.parse(data);
+		  
+		  
+		  console.log(obj.features.length);
+		  
+		  obj_len = obj.features.length;
+		  d = 'empty'
+		  for (i = 0; i < obj_len; i++){
+			
+			console.log('b: ' + (obj.features[i].properties.top - latlng.lat));
+			console.log('c: ' + (obj.features[i].properties.left - latlng.lng));
+			
+			b = obj.features[i].properties.top - latlng.lat;
+			c = obj.features[i].properties.left - latlng.lng;
+			
+			console.log(Math.sqrt((b**2) + (c**2)));
+			
+			a = Math.sqrt((b**2) + (c**2))
+			
+			
+			if (d !== 'empty') {
+				if (a < d){
+				d = a;
+				x = i;} else {
+				d = d;}
+			} else {
+			d = a
+			x = i}
+			}
+			
+			
+			
+		  
+		  console.log('d: ' + d);
+		  console.log('i: ' + x);
+		  
+		  console.log(obj.features[0].properties.left);
+		  console.log(obj.features[0].properties.top);
+		  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
+		  "Current weather: " + obj.features[x].properties.temp1 + " °C"
+		  }
+		});
+		});
+		  
+		  
+		  
+		  
+		  
+		  /*
+		  $.get( "http://104.245.145.251:50780/documents/grid_tilename_G" + tile + ".geojson", function( data ) {
+		  //https://raw.githubusercontent.com/aaronjutzi/Fahrenheit2101/main/grid_tilename_G792448788444.geojson
+		  
+		  //console.log(data);
+		  //var obj  = JSON.stringify(data);
+		  var obj = JSON.parse(data);
+		  
+		  
+		  console.log(obj.features.length);
+		  
+		  obj_len = obj.features.length;
+		  d = 'empty'
+		  for (i = 0; i < obj_len; i++){
+			
+			console.log('b: ' + (obj.features[i].properties.top - latlng.lat));
+			console.log('c: ' + (obj.features[i].properties.left - latlng.lng));
+			
+			b = obj.features[i].properties.top - latlng.lat;
+			c = obj.features[i].properties.left - latlng.lng;
+			
+			console.log(Math.sqrt((b**2) + (c**2)));
+			
+			a = Math.sqrt((b**2) + (c**2))
+			
+			
+			if (d !== 'empty') {
+				if (a < d){
+				d = a;
+				x = i;} else {
+				d = d;}
+			} else {
+			d = a
+			x = i}
+			}
+			
+			
+			
+		  
+		  console.log('d: ' + d);
+		  console.log('i: ' + x);
+		  
+		  console.log(obj.features[0].properties.left);
+		  console.log(obj.features[0].properties.top);
+		  document.getElementById("temp").innerHTML = "Marker coordinates: " + latlng.lat.toFixed(5) + ', ' + latlng.lng.toFixed(5) + "<br />" +
+		  "Current weather: " + obj.features[x].properties.temp1 + " °C"
+		  
+		});
+		});
+		
+		*/
+		</script>
+
+	</body>
+</html>
