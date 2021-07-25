@@ -61,7 +61,7 @@
 		});
 
 
-		var startup = document.getElementById("start").innerHTML = "<b>Ontario Trail Weather Map</b>: Click a marker to get trail information, and and click anywhere to get the current weather";
+		var startup = document.getElementById("start").innerHTML = "<b>Ontario Trail Weather Map</b>: Click a marker to get trail information, and click anywhere to get the current weather";
 
 
 		// source: https://github.com/pointhi/leaflet-color-markers
